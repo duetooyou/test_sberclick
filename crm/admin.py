@@ -5,6 +5,7 @@ from .models import Category, Claim
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name',)
+    ordering = ('id',)
 
 
 @admin.register(Claim)
