@@ -19,9 +19,11 @@ class Claim(models.Model):
     changed = models.DateTimeField(auto_now=True,
                                    verbose_name='Время изменения')
     category = models.OneToOneField(Category,
+                                    on_delete=models.CASCADE,
                                     related_name='bids',
                                     verbose_name='Категория')
     owner = models.ForeignKey(get_user_model(),
+                              on_delete=models.CASCADE,
                               related_name='bids',
                               verbose_name='Автор')
     status = models.TextField(choices=STATUS,
