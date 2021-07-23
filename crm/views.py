@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Claim
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
+from .forms import ClaimCreateForm
 
 
 class AllClaimsView(ListView):
@@ -8,12 +9,10 @@ class AllClaimsView(ListView):
     template_name = 'crm/claims/list.html'
 
     def get_queryset(self):
-        if self.request.GET.get('message') == 'open':
-            return Claim.objects.filter(status='open')
-        elif self.request.GET.get('message') == 'in_progress':
-            return Claim.objects.filter(status='in_progress')
-        elif self.request.GET.get('message') == 'closed':
-            return Claim.objects.filter(status='closed')
-        else:
-            return Claim.objects.all()
+        return Claim.objects.filter()
 
+
+class ClaimCreateView(CreateView):
+    queryset = Claim.objects.all()
+    form_class = ClaimCreateForm
+    template_name = 'crm/claims/list.html'

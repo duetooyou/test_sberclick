@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+{% extends "home.html" %}
+{% block title %}Вход{% endblock %}
+{% block content %}
+<h1>Войти</h1>
+<div class="module">
+    {% if form.errors %}
+        <p>Проверьте правильнотсь ввода лошина и пароля и попробуйте снова.</p>
+    {% else %}
+        <p>Используйте форму ниже, чтобы войти:</p>
+    {% endif %}
+<div class="login-form">
+    <form action="{% url 'login' %}" method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+<input type="hidden" name="next" value="{{ next }}" />
+<p><input type="submit" value="Войти"></p>
+</form>
+</div>
+</div>
+{% endblock %}
+</html>

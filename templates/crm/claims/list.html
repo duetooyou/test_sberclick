@@ -1,0 +1,13 @@
+{% extends "../../home.html" %}
+{% block content %}
+<h1>Список заявок</h1>
+{% for claim in claims %}
+    <p>{{ claim.name }}</p>
+    <p>{{ claim.created }}</p>
+{% endfor %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <p><input type="submit" value="Добавить заявку "></p>
+    </form>
+{% endblock %}
