@@ -1,13 +1,31 @@
 {% extends "../../home.html" %}
 {% block content %}
 <h1>Список заявок</h1>
+<form action="{% url 'category_filter' %}" method="get">
+    <p>Выберите фильтр:</p>
+    <ul>
+    {% for category in view.get_categories %}
+        <li>
+            <input type="checkbox" name="category" value="{{ category.name }}">
+            <span>{{ category.name }}</span>
+        </li>
+    {% endfor %}
+    </ul>
+    <ul>
+        {% for status in view.get_status %}
+            <li>
+                <input type="checkbox" name="status" value="{{ status }}">
+                <span>{{ status|capfirst }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <button type="submit">Фильтровать по типу заявки</button>
+</form>
+    <a href="{% url 'claims_list' %}">Вернуться ко всем заявкам</a>
 {% for claim in claims %}
-    <p>{{ claim.name }}</p>
-    <p>{{ claim.created }}</p>
+    <h3>{{ claim.name }}</h3>
+    <p>{{ claim.created | date:'Y-m-d H:i' }} Статус: {{ claim.status }} {{ claim.category }}</p>
+    {% empty %}
+    <p>Заявки отсутвуют</p>
 {% endfor %}
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <p><input type="submit" value="Добавить заявку "></p>
-    </form>
 {% endblock %}

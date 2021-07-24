@@ -15,9 +15,9 @@ class Category(models.Model):
 
 class Claim(models.Model):
 
-    STATUS = (('open', 'открыта'),
-              ('in_progress', 'в работе'),
-              ('closed', 'закрыта'))
+    STATUS = (('открыта', 'Открыта'),
+              ('в работе', 'В работе'),
+              ('закрыта', 'Закрыта'))
 
     name = models.CharField(max_length=50,
                             verbose_name='Наименование заявки')
@@ -27,7 +27,7 @@ class Claim(models.Model):
                                    verbose_name='Время изменения')
     category = models.OneToOneField(Category,
                                     on_delete=models.CASCADE,
-                                    related_name='bids',
+                                    related_name='to_bids',
                                     verbose_name='Категория')
     owner = models.ForeignKey(get_user_model(),
                               on_delete=models.CASCADE,
