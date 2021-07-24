@@ -21,8 +21,8 @@ class Claim(models.Model):
 
     name = models.CharField(max_length=50,
                             verbose_name='Наименование заявки')
-    created = models.DateTimeField(auto_now_add=True,
-                                   verbose_name='Время создания')
+    created = models.DateField(auto_now_add=True,
+                               verbose_name='Время создания')
     changed = models.DateTimeField(auto_now=True,
                                    verbose_name='Время изменения')
     category = models.OneToOneField(Category,

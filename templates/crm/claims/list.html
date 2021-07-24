@@ -1,7 +1,7 @@
 {% extends "../../home.html" %}
 {% block content %}
-<h1>Список заявок</h1>
-<form action="{% url 'category_filter' %}" method="get">
+
+<form action="{% url 'status_category_filter' %}" method="get">
     <p>Выберите фильтр:</p>
     <ul>
     {% for category in view.get_categories %}
@@ -16,16 +16,29 @@
             <li>
                 <input type="checkbox" name="status" value="{{ status }}">
                 <span>{{ status|capfirst }}</span>
-        </li>
+            </li>
         {% endfor %}
     </ul>
-    <button type="submit">Фильтровать по типу заявки</button>
+        <button type="submit">Фильтровать по типу заявки</button>
 </form>
+    <br>
+    <form action="{% url 'date_filter' %}" method="get">
+        <input type="date" name="selected_date" value="{{view.get_selected_date}}">
+        <button type="submit">Фильтровать по дате</button>
+    </form>
+    <br>
+  <form action="{% url 'daterange_filter' %}" method="get">
+        <input type="date" name="start_date" value="{{view.get_start_date}}">
+        <input type="date" name="end_date" value="{{view.get_end_date}}">
+        <button type="submit">Фильтровать по промежутку дат</button>
+  </form>
+    <br>
     <a href="{% url 'claims_list' %}">Вернуться ко всем заявкам</a>
-{% for claim in claims %}
-    <h3>{{ claim.name }}</h3>
-    <p>{{ claim.created | date:'Y-m-d H:i' }} Статус: {{ claim.status }} {{ claim.category }}</p>
+    {% for claim in claims %}
+        <h3>{{ claim.name }}</h3>
+        <p>Создана: {{ claim.created | date:'Y-m-d H:i' }} Статус: {{ claim.status }} </p>
+        <p>Категория: {{ claim.category }}</p>
     {% empty %}
-    <p>Заявки отсутвуют</p>
-{% endfor %}
+        <p>Заявки отсутвуют</p>
+    {% endfor %}
 {% endblock %}
