@@ -29,6 +29,8 @@ class Claim(models.Model):
                                     on_delete=models.CASCADE,
                                     related_name='to_bids',
                                     verbose_name='Категория')
+    text = models.TextField(max_length=400,
+                            verbose_name='Содержание')
     owner = models.ForeignKey(get_user_model(),
                               on_delete=models.CASCADE,
                               related_name='bids',
