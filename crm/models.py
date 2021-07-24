@@ -2,6 +2,10 @@ from django.contrib.auth import get_user_model
 from django.db import models
 
 
+class Customer(models.Model):
+    pass
+
+
 class Category(models.Model):
     name = models.CharField(max_length=30)
 
@@ -31,7 +35,7 @@ class Claim(models.Model):
                                     verbose_name='Категория')
     text = models.TextField(max_length=400,
                             verbose_name='Содержание')
-    owner = models.ForeignKey(get_user_model(),
+    executor = models.ForeignKey(get_user_model(),
                               on_delete=models.CASCADE,
                               related_name='bids',
                               verbose_name='Автор')

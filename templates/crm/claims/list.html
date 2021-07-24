@@ -36,7 +36,7 @@
     <a href="{% url 'claims_list' %}">Вернуться ко всем заявкам</a>
     {% for claim in claims %}
         <h3>{{ claim.name }}</h3>
-        <p>Создана: {{ claim.created | date:'Y-m-d H:i' }} Статус: {{ claim.status }} </p>
+        <p>Создана: {{ claim.created | date:'Y-m-d' }} Статус: {{ claim.status }} </p>
         <p>Категория: {{ claim.category }}</p>
     {% empty %}
         <p>Заявки отсутвуют</p>

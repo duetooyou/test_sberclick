@@ -10,4 +10,4 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Claim)
 class ClaimAdmin(admin.ModelAdmin):
-    list_filter = ('status', 'owner', 'category',)
+    list_filter = ('status', 'executor', 'category',)
