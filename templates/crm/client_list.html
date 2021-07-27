@@ -1,0 +1,15 @@
+{% extends "../home.html" %}
+{% block content %}
+   <lu>
+    {% for client in clients %}
+        <p>Имя: {{ client.name }}</p>
+        <p>Фамилия: {{ client.surname }}</p>
+        <p>Уведомления: {{ client.notification }}</p>
+        <a href="{% url "client_delete" client.id %}">Удалить</a>
+        <a href="{% url "client_update" client.id %}">Редактировать</a>
+        <hr>
+   {% empty %}
+    <p>Клиенты отсутствуют</p>
+   {% endfor %}
+   </lu>
+{% endblock %}

@@ -7,16 +7,19 @@
 <body>
     <div id="header">
             <ul class="menu">
+                <li><a href="{% url "home" %}">На главную</a></li>
                 {% if request.user.is_authenticated %}
-                    <li><a href="{% url "logout" %}">Выход</a></li>
+                    <li><a href="{% url "logout" %}" class="button">Выход</a></li>
                 {% else %}
                     <li><a href="{% url "login" %}">Войти</a></li>
                 {% endif %}
             </ul>
+            <p><a href="{% url 'claims_list' %}">К заявкам</a></p>
+            <p><a href="{% url 'clients_list' %}">К пользователям</a></p>
     </div>
     <div id="content">
         {% block content %}
-            <a href="{% url 'login' %}">К заявкам</a>
+
         {% endblock %}
     </div>
 </body>

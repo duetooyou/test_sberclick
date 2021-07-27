@@ -1,0 +1,9 @@
+{% extends "../home.html" %}
+{% block content %}
+   <h2>Удаление клиента "{{ object.name }} {{ object.surname }}"</h2>
+    <form action="" method="post">
+{% csrf_token %}
+<p>Удалить пользователя "{{ object.name }} {{ object.surname }}"?</p>
+<input type="submit" class="button" value="Да">
+</form>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "../home.html" %}
+{% block content %}
+    <h3>Создание новой заявки</h3>
+    <form action="." method="post">
+        {{ form.as_p }}
+        {% csrf_token %}
+    <p><input type="submit", value="Сохранить заявку"></p>
+    </form>
+{% endblock %}
