@@ -11,7 +11,7 @@ def send_message(sender, instance, created=False, **kwargs):
     if Claim.objects.filter(pk=instance.id).exists() and Claim.objects.get(id=instance.id).owner.notification and \
             instance.status != Claim.objects.get(pk=instance.id).status:
         print(Claim.objects.get(id=instance.id).owner.notification)
-        send_change_status_message(message=message_for_user)
+        send_change_status_message(message_for_user)
 
 
 @receiver(post_save, sender=Claim)
@@ -19,4 +19,4 @@ def send_message(sender, instance, created, **kwargs):
     message_for_user = f"{instance.owner} Ваша заявка создана № {instance.id}" \
                        f" Статус вашей заявки: {instance.status}"
     if created and Claim.objects.get(id=instance.id).owner.notification:
-        send_change_status_message(message=message_for_user)
+        send_change_status_message(message_for_user)
