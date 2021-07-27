@@ -1,0 +1,14 @@
+{% extends "../home.html" %}
+{% block content %}
+    <p>Название заявки: {{ claim.name }}</p>
+    <p>Категория: {{ claim.name }}</p>
+    <P>Дата создания: {{ claim.created }}</P>
+    <p>Содержание заявки: {{ claim.body }}</p>
+    <p>Время изменения: {{ claim.changed | date:'Y-m-d H:i' }}</p>
+    <p>Автор: {{ claim.owner }}</p>
+    {% if claim.executor %}
+        <p>Исполнитель: {{ claim.executor }}</p>
+    {% else %}
+        <p><input type="submit", value="Взять в работу"></p>
+    {% endif %}
+{% endblock %}
