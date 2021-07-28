@@ -1,7 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.urls import reverse
-from model_utils import FieldTracker
 
 
 class Client(models.Model):
@@ -59,10 +57,6 @@ class Claim(models.Model):
                                  verbose_name='Исполнитель заявки')
     status = models.TextField(choices=STATUS,
                               verbose_name='Статус заявки')
-    slug = models.SlugField(max_length=150,
-                            unique=True,
-                            )
-    tracker = FieldTracker()
 
     class Meta:
         unique_together = ('name', 'category', 'owner')
@@ -72,6 +66,3 @@ class Claim(models.Model):
 
     def __str__(self):
         return f'{self.name}'
-
-    def get_absolute_url(self):
-        return reverse('claims_detail', kwargs={'slug': self.slug})

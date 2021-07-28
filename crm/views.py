@@ -42,16 +42,24 @@ class AllClaimsView(LoginRequiredMixin, ListView, CategoryStatusDateMixin):
     context_object_name = 'claims'
 
 
-class ClaimDetailView(LoginRequiredMixin, DetailView):
-    model = Claim
-    queryset = Claim.objects.all()
-    slug_field = 'slug'
-
-
 class ClaimCreateView(CreateView):
     queryset = Claim.objects.all()
     form_class = ClaimCreateForm
     template_name = 'crm/claim_create.html'
+    success_url = reverse_lazy('claims_list')
+
+
+class ClaimUpdateView(LoginRequiredMixin, UpdateView):
+    model = Claim
+    form_class = ClaimCreateForm
+    queryset = Claim.objects.all()
+    template_name = 'crm/claim_update.html'
+    success_url = reverse_lazy('claims_list')
+
+
+class ClaimDeleteView(LoginRequiredMixin, DeleteView):
+    model = Claim
+    template_name = 'crm/claim_delete.html'
     success_url = reverse_lazy('claims_list')
 
 
@@ -63,7 +71,6 @@ class ClaimByCategoryFilter(AllClaimsView, CategoryStatusDateMixin):
 
 class ClaimByDateFilter(AllClaimsView, CategoryStatusDateMixin):
     def get_queryset(self):
-        print(self.request.GET.get('selected_date'))
         if self.request.GET.get('selected_date'):
             return Claim.objects.filter(created=self.request.GET.get('selected_date'))
         else:
@@ -87,7 +94,7 @@ class AllClientsView(LoginRequiredMixin, ListView):
 
 class ClientCreateView(LoginRequiredMixin, CreateView):
     queryset = Client.objects.all()
-    form_class = ClaimCreateForm
+    form_class = ClientCreateForm
     template_name = 'crm/client_create.html'
     success_url = reverse_lazy('clients_list')
 
@@ -102,6 +109,5 @@ class ClientUpdateView(LoginRequiredMixin, UpdateView):
 
 class ClientDeleteView(LoginRequiredMixin, DeleteView):
     model = Client
-    queryset = Client.objects.all()
     template_name = 'crm/client_delete.html'
     success_url = reverse_lazy('clients_list')

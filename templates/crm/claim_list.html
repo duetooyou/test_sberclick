@@ -1,6 +1,9 @@
 {% extends "../home.html" %}
 {% block content %}
-<a href="{% url 'claims_create' %}">Добавить заявку</a>
+    <p><a href="{% url 'client_create' %}">Добавить пользователя</a></p>
+    <p><a href="{% url 'claims_create' %}">Добавить заявку</a></p>
+
+
 <form action="{% url 'status_category_filter' %}" method="get">
     <p>Выберите фильтр:</p>
     <ul>
@@ -37,9 +40,11 @@
     <br>
     {% for claim in claims %}
         <br>
-        <a href="{{  claim.get_absolute_url }}" class="p">{{ claim.name }}</a>
+        <a href="{% url 'claims_update' claim.id %}" class="p">{{ claim.name }}</a>
         <p>Создана: {{ claim.created | date:'Y-m-d' }} Статус: {{ claim.status }} </p>
         <p>Категория: {{ claim.category }}</p>
+        <p>Автор: {{ claim.owner }}</p>
+        <p>Иcполнитель: {{ claim.executor }}</p>
     {% empty %}
         <p>Заявки отсутвуют</p>
     {% endfor %}

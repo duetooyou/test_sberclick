@@ -20,7 +20,7 @@ class ClaimAdmin(admin.ModelAdmin):
                     'owner',
                     'status',
                     'created',)
-    list_filter = ('id',
-                   'status',
-                   'category',)
-    prepopulated_fields = {'slug': ['name']}
+    list_filter = ('status',
+                   'category',
+                   'owner',
+                   'executor',)

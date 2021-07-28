@@ -1,0 +1,14 @@
+{% extends "../home.html" %}
+{% block content %}
+   <h2>Удаление заявки {{ object.name }} {{ object.category }} созданной {{ object.owner }}</h2>
+    <form action="" method="post">
+{% csrf_token %}
+<p>Удалить заявку "{{ object.name }} {{ object.surname }}"?</p>
+        {% if object.status != 'закрыта' %}
+            <p>Заявка {{ object.status }}. Удаление возможно только для заявок со статусом 'закрыта'</p>
+            <a href="{% url 'claims_update' claim.id %}">Закрыть заявку</a>
+            {% else %}
+            <input type="submit" class="button" value="Да">
+        {% endif %}
+</form>
+{% endblock %}
