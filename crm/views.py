@@ -13,7 +13,7 @@ from .models import Claim, Category, Client
 
 
 def home_page(request):
-    return render(request, template_name='home.html')
+    return render(request, template_name='happy.html')
 
 
 class CategoryStatusDateMixin:
